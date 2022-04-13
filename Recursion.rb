@@ -28,3 +28,34 @@ def exp_two(number, power)
     return exp_two(number, power/2) ** 2 if power.even?
     return number * (exp_two(number,(power-1)/2) ** 2) if power.odd?
 end
+
+
+class Array
+    def deep_dup(array = self)
+        return array.dup if array == array.flatten
+        duped_arr = []
+        array.each do |subarr|
+            duped_arr << deep_dup(subarr)
+        end
+        return duped_arr 
+    end
+end
+
+# p deep_dup (robot_parts)
+    
+robot_parts = [
+  ["nuts", "bolts", "washers"],
+  ["capacitors", "resistors", "inductors"]
+]
+robot_parts_copy = robot_parts.deep_dup
+
+# shouldn't modify robot_parts
+p robot_parts
+p robot_parts_copy
+
+robot_parts_copy[1] << "LEDs"
+# but it does
+p robot_parts[1] # => ["capacitors", "resistors", "inductors", "LEDs"]
+p robot_parts_copy[1] # => ["capacitors", "resistors", "inductors", "LEDs"]
+
+
