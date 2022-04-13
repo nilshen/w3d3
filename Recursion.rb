@@ -57,7 +57,6 @@ end
 # You shouldn't have to pass any arrays between methods; 
 # you should be able to do this just passing a single argument for the number of Fibonacci numbers requested.
 
-p rec_fib(5)
 
 
 # The binary search algorithm begins by comparing the target value to the value of the middle element of the sorted array. 
@@ -96,3 +95,28 @@ end
 # You'll want to write a merge helper method to merge the sorted halves.
 # To get a visual idea of how merge sort works, watch this gif and check out this diagram.
 
+def merge_sort(arr)
+    return arr if arr.length == 1
+    p arr
+    mid = arr.length/2
+    right = merge_sort(arr[mid..-1])
+    left = merge_sort(arr[0...mid])
+    return merge(left,right)
+end
+
+def merge (left, right)
+    sorted_arr = []
+    while !left.empty? && !right.empty?
+        if left[0] < right[0]
+            sorted_arr.push(left.shift())
+        else
+            sorted_arr.push(right.shift())
+        end
+    end
+    return sorted_arr + left + right
+end
+
+
+arr = [38,27,43,3,9,82,10, 34]
+
+p merge_sort (arr)
