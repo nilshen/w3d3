@@ -41,21 +41,58 @@ class Array
     end
 end
 
-# p deep_dup (robot_parts)
-    
-robot_parts = [
-  ["nuts", "bolts", "washers"],
-  ["capacitors", "resistors", "inductors"]
-]
-robot_parts_copy = robot_parts.deep_dup
+# p deep_dup (robot_parts
 
-# shouldn't modify robot_parts
-p robot_parts
-p robot_parts_copy
 
-robot_parts_copy[1] << "LEDs"
-# but it does
-p robot_parts[1] # => ["capacitors", "resistors", "inductors", "LEDs"]
-p robot_parts_copy[1] # => ["capacitors", "resistors", "inductors", "LEDs"]
+# Fibonacci
+# Write a recursive and an iterative Fibonacci method. 
+# The method should take in an integer n and return the first n Fibonacci numbers in an array.
+def rec_fib(n)
+    return [] if n == 0
+    return [1] if n == 1
+    return [1,1] if n == 2
+    new_arr = rec_fib(n-1)
+    return new_arr << new_arr[-1] + new_arr[-2]
+end
+# You shouldn't have to pass any arrays between methods; 
+# you should be able to do this just passing a single argument for the number of Fibonacci numbers requested.
 
+p rec_fib(5)
+
+
+# The binary search algorithm begins by comparing the target value to the value of the middle element of the sorted array. 
+
+# If the target value is equal to the middle element's value, then the position is returned and the search is finished. 
+# If the target value is less than the middle element's value, then the search continues on the lower half of the array; 
+# or if the target value is greater than the middle element's value, then the search continues on the upper half of the array.
+
+# This process continues, eliminating half of the elements, and comparing the target value to the value of the middle element 
+# of the remaining elements - until the target value is either found (and its associated element position is returned), or 
+# until the entire array has been searched (and "not found" is returned).
+
+# Write a recursive binary search: bsearch(array, target). Note that binary search only works on sorted arrays. 
+# Make sure to return the location of the found object (or nil if not found!). Hint: you will probably want to use subarrays.
+
+# Make sure that these test cases are working:
+
+def bsearch(array, target)
+    middle = array.length / 2
+
+    return middle if array[middle] == target
+    return nil if array.length <= 1 
+    p array
+    if target < array[middle]
+        bsearch(array[0...middle], target)
+    else 
+        bsearch(array[middle+1..-1], target) + middle + 1
+    end
+end
+
+
+# Merge Sort
+# Implement a method merge_sort that sorts an Array:
+
+# The base cases are for arrays of length zero or one. Do not use a length-two array as a base case. This is unnecessary.
+# You'll want to write a merge helper method to merge the sorted halves.
+# To get a visual idea of how merge sort works, watch this gif and check out this diagram.
 
