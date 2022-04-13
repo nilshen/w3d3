@@ -184,11 +184,3 @@ end
 #                             #     [3, 1, 2], [3, 2, 1]]
 
 
-def make_change(amount, coins = [25, 10, 5, 1])
-    
-    coins.each 
-
-end
-
-
-
