@@ -117,6 +117,44 @@ def merge (left, right)
 end
 
 
-arr = [38,27,43,3,9,82,10, 34]
+def subsets(array)
+    return [] if array.empty?
+    return [[], array] if array.length == 1
 
-p merge_sort (arr)
+    pairs = []
+
+    last = subsets(array[0...-1])
+    
+    last.each do |ele|
+        pairs << ele
+    end
+    last.each do |ele|
+        temp = ele.dup
+        pairs << temp.concat([array[-1]])
+    end
+    return pairs
+end
+
+
+p subsets([]) # => [[]]
+p subsets([1]) # => [[], [1]]
+p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+p subsets([1, 2, 3])
+# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
+
+
+# PERMUTATIONS
+# Write a recursive method permutations(array) that calculates all the permutations of the given array. 
+# For an array of length n there are n! different permutations. So for an array with three elements we 
+# will have 3 * 2 * 1 = 6 different permutations.
+
+permutations([1, 2, 3]) # => [[1, 2, 3], [1, 3, 2],
+                        #     [2, 1, 3], [2, 3, 1],
+                        #     [3, 1, 2], [3, 2, 1]]
+
+# You can use Ruby's built in Array#permutation method to get a better understanding of what you will be building.
+
+# [1, 2, 3].permutation.to_a  # => [[1, 2, 3], [1, 3, 2],
+#                             #     [2, 1, 3], [2, 3, 1],
+#                             #     [3, 1, 2], [3, 2, 1]]
