@@ -136,11 +136,12 @@ def subsets(array)
 end
 
 
-p subsets([]) # => [[]]
-p subsets([1]) # => [[], [1]]
-p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
-p subsets([1, 2, 3])
-# => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+# p subsets([]) # => [[]]
+# p subsets([1]) # => [[], [1]]
+# p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+# p subsets([1, 2, 3])
+# # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
 
 
 
@@ -149,12 +150,45 @@ p subsets([1, 2, 3])
 # For an array of length n there are n! different permutations. So for an array with three elements we 
 # will have 3 * 2 * 1 = 6 different permutations.
 
-permutations([1, 2, 3]) # => [[1, 2, 3], [1, 3, 2],
-                        #     [2, 1, 3], [2, 3, 1],
-                        #     [3, 1, 2], [3, 2, 1]]
+def permutations(arr)
+    return arr if arr.length == 1
+    perms = []
+    arr.each.with_index do |ele, i|
+        temp = arr.dup
+        temp.slice!(i)
+       permutations(temp).each do |el|
+        if !el.is_a? Array
+            perms << [ele].concat([el])
+        else
+            perms << [ele].concat(el)
+        end
+       end
+    end
+return perms
+end
+
+
+
+
+
+
+# p permutations([1, 2, 3]) 
+# => [[1, 2, 3], [1, 3, 2],
+#                             [2, 1, 3], [2, 3, 1],
+#                             [3, 1, 2], [3, 2, 1]]
 
 # You can use Ruby's built in Array#permutation method to get a better understanding of what you will be building.
 
 # [1, 2, 3].permutation.to_a  # => [[1, 2, 3], [1, 3, 2],
 #                             #     [2, 1, 3], [2, 3, 1],
 #                             #     [3, 1, 2], [3, 2, 1]]
+
+
+def make_change(amount, coins = [25, 10, 5, 1])
+    
+    coins.each 
+
+end
+
+
+
